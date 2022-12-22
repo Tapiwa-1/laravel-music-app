@@ -42,8 +42,8 @@ class UserController extends Controller
 
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
-            // $user->email = $request->email;
-            // $user->description = $request->description;
+            $user->location = $request->location;
+            $user->description = $request->description;
 
             $user->save();
             return response()->json('User details updated', 200);

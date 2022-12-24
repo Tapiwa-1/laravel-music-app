@@ -26,7 +26,7 @@ class SongsByUserController extends Controller
 
         return response()->json([
             'artist_id' => $user->id,
-            'artist_id' => $user->first_name.' '.$user->last_name,
+            'artist_name' => $user->first_name.' '.$user->last_name,
             'songs' => $songs,
 
         ],200);

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\SongController;
+use App\Http\Controllers\API\SongsByUserController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,10 +21,12 @@ Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+
     Route::get('users/{id}', [UserController::class, 'show']);
-        Route::put('users/{id}', [UserController::class, 'update']);
-    Route::get('inside-mware', function () {
-        return response()->json('Success', 200);
-    }
-    );
+    Route::put('users/{id}', [UserController::class, 'update']);
+
+    Route::post('songs', [SongController::class, 'store']);
+    Route::delete('songs/{id}/{user_id}', [SongController::class, 'destroy']);
+
+    Route::get('user/{user_id}/songs', [SongsByUserController::class, 'index']);
 });

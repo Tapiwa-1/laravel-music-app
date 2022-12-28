@@ -48,10 +48,12 @@ class PostController extends Controller
         //
         try {
             if ($request->hasFile('image')=== false){
-                return response()->json(['errror' => 'There is no image to upload'], 400);
+                return response()->json(['error' => 'There is no image to upload'], 400);
             }
 
             $post = new Post;
+            $post->user_id = $request->get('user_id');
+            $post->image = $request->get('image');
             $post->title = $request->get('title');
             $post->location = $request->get('location');
             $post->description = $request->get('description');
@@ -65,6 +67,7 @@ class PostController extends Controller
             return response()->json([
                 'message'=>'Something went wrong in PostController.store',
                 'error' => $e->getMessage(),
+
             ]);
         }
     }
@@ -81,7 +84,7 @@ class PostController extends Controller
         try {
             $post = Post::with('user')->findOrFail($id);
 
-            return response()->json('New Post Created', 200);
+            return response()->json($post, 200);
         }catch (\Exception $e){
             return response()->json([
                 'message'=>'Something went wrong in PostController.store',

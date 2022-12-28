@@ -16,12 +16,11 @@ class Post extends Model
         'description',
         'location'
     ];
-
-    /***
-     * Get the user associated with the post
-    */
-
-    public function user(){
+    /**
+     * Get the user associated with the post.
+     */
+    public function user()
+    {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 }
